@@ -1,0 +1,50 @@
+prog terminal xterm rxvt-unicode +sb -si -sw -sk -fn 7x14 -fb 7x14bold -bg rgb:02/0d/1c -fg white -sl 10000
+prog chroot xterm dchroot 'rxvt-unicode +sb -si -sw -sk -fn 7x14 -fb 7x14bold -bg rgb:1c/02/0d -fg white -sl 10000'
+prog firefox /usr/share/pixmaps/mozilla-firefox.xpm mozilla-firefox -P default
+prog konqueror konqueror konqueror
+prog emacs emacs emacs
+separator
+menu apps folder {
+    menu graphics folder {
+        prog gimp gimp gimp
+#        prog sketch sketch sketch
+        prog inkscape /usr/share/pixmaps/inkscape.xpm inkscape
+    }
+    menu office folder {
+        prog ooo ooo_gulls openoffice
+#       prog word app word.sh
+    }
+    separator
+    prog calculator xcalc gcalctool
+    prog gaim gaim gaim
+    prog thunderbird mozilla_mail3 mozilla-thunderbird
+    prog xmms xmms xmms
+    #prog vmware xosview ssh -X vm vmware
+    prog vmware xosview /usr/local/vmware/bin/vmware
+    prog vbox xosview bash -c "LD_LIBRARY_PATH=/home/dicej/p/VirtualBox-OSE-1.4.0/out/linux.amd64/release/bin /home/dicej/p/VirtualBox-OSE-1.4.0/out/linux.amd64/release/bin/VirtualBox"
+    prog jprofiler java /home/sw/jprofiler/bin/jprofiler
+    prog kphone kphone kphone
+}
+menufile debian folder /etc/X11/icewm/programs
+menu remote folder {
+    prog "vnc _lnx18" windows rxvt-unicode -fn 7x14  -e xvncviewer -fn 7x14 lnx18.ecovate.com:1
+    prog "vnc _pippin" windows rxvt-unicode -fn 7x14  -e xvncviewer -fn 7x14 pippin.ecovate.com
+    prog "vnc _usdenstream" windows rxvt-unicode -fn 7x14 -e xvncviewer -fn 7x14 usdenstream001.ecovate.com
+    prog "vnc _balin" windows rxvt-unicode -fn 7x14  -e xvncviewer -fn 7x14 balin.ecovate.com
+    prog "rdesktop usdenstream" windows rdesktop -K -T usdenstream001 -g 1400x800 -u Administrator usdenstream001.ecovate.com
+    prog "rdesktop balin" windows rdesktop -K -T balin -g 1400x800 -u root balin.ecovate.com
+}
+menu system folder {
+    menu wm folder {
+        restart icewm - icewm
+        restart icewm-logged - icewm-logged.sh
+    	restart wmaker - wmaker
+    	restart enlightenment - enlightenment
+   	restart blackbox - blackbox
+    	restart fvwm2 - fvwm2
+    	restart fvwm - fvwm
+    }
+    prog "Control Panel" redhat control-panel
+    prog xload xload xload
+    prog xosview xosview xosview
+}

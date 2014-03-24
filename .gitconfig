@@ -1,0 +1,8 @@
+[user]
+        name = "Joel Dice"
+        email = "joel.dice@gmail.com"
+[color]
+	ui = auto
+[review "https://android-review.googlesource.com/"]
+       autoupload = true
+       username = "git-joel.dice.gmail.com"

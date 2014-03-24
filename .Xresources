@@ -1,0 +1,38 @@
+*visualBell: true
+*Font:       6x13
+*font:       6x13
+
+Rxvt*font:              6x13
+Rxvt*Font:             6x13
+Rxvt*scrollBar:        False
+Rxvt*saveLines:        10000
+!Rxvt*background:	black
+!Rxvt*foreground:	white
+Rxvt*color2:           pale green
+Rxvt*color3:           light yellow
+Rxvt*color4:           light blue
+Rxvt*color5:           pink
+
+Rxvt*color10:          pale green
+Rxvt*color11:          light yellow
+Rxvt*color12:          light blue
+Rxvt*color13:          pink
+Rxvt*iso14755: False
+Rxvt*iso14755_52: False
+
+!#Xft.rgba: rgb
+
+!# Scrolling on wheel mouse
+Rxvt.vt100.translations: #override\n\
+<Btn4Down>,<Btn4Up>:scroll-back(1,page)\n\
+<Btn5Down>,<Btn5Up>:scroll-forw(1,page)\n\
+
+!# japanese!
+! *inputMethod: kinput2
+
+emacs*Font: 6x13
+emacs*background: black
+emacs*foreground: white
+emacs*cursorColor: white
+emacs*pointerColor: white
+emacs*internalBorder: 2
