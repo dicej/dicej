@@ -27,8 +27,8 @@
 
 (setq default-tab-width 2)
 
-(load "/usr/share/emacs/site-lisp/clang-format-3.5/clang-format.el")
-(global-set-key [C-M-tab] 'clang-format-region)
+;(load "/usr/share/emacs/site-lisp/clang-format-3.5/clang-format.el")
+;(global-set-key [C-M-tab] 'clang-format-region)
 
 ;; no menu bar for you!
 (menu-bar-mode nil)

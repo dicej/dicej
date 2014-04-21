@@ -10,7 +10,7 @@ fi
 # User specific environment and startup programs
 
 export TERM=xterm
-export JAVA_HOME=/usr/local/java
+export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 #export ANT_HOME=$HOME/p/apache-ant-1.7.1
 #export ANT_OPTS="-Xmx1024m -Xss512k"
 
