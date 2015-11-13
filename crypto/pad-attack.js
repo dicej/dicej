@@ -67,9 +67,9 @@ function queryAll(guess) {
     query(guess, function(success) {
         if (success) {
             if (guess.length == c.length - 16) {
-                console.log("plaintext is " + guess.toString("hex"));
+                console.log("plaintext is " + guess.toString("ascii"));
             } else {
-                console.log("plaintext so far is " + guess.toString("hex"));
+                console.log("plaintext so far is " + guess.toString("ascii"));
                 queryAll(prepend(0, guess));
             }
         } else {
