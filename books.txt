@@ -1,0 +1,191 @@
+Life's Other Secret - Stewart
+Problems of Philosophy - Russell
+Short Bike Rides in Colorado - Leccese
+Practical Packrat Parsing - Grimm
+Compiler Support for GC in a Statically Typed Language - Diwan, Moss, Hudson
+Composable Memory Transactions - Peyton Jones
+Persistant Data Structures - Okasaki
+Deadeye Dick - Vonnegut
+Get Fuzzy 2: Fuzzy Logic and Get Fuzzy Experience - Conley
+Dream of Scipio - Pears
+Player Piano - Vonnegut
+Sirens of Titan - Vonnegut
+Look at the Birdie - Vonnegut
+Galapagos - Vonnegut
+Breakfast of Champions - Vonnegut
+Stone's Fall - Pears
+Kim - Kipling
+*Clockwork Rocket - Egan
+*Teranesia - Egan
+*Quarantine - Egan
+*Permutation City - Egan
+*Schild's Ladder - Egan
+*Zendegi - Egan
+*Diaspora - Egan
+*Distress - Egan
+*Incandescence - Egan
+*Luminous - Egan
+Around the World in 45 Years - Schultz
+Satanic Verses - Rushdie
+Math Methods in the Physical Sciences - Boas
+God's Fires - Anthony
+Connecticut Yankee in King Authur's Court - Twain
+Flatland - Abbott
+Practical Common Lisp - Seibel
+Kiln People - Brin
+Planiverse - Dewdney
+*The Man Who Folded Himself - Gerrold
+*The Giver - Lowry
+*Neuromancer - Gibson
+*Count Zero - Gibson
+Mission of Gravity - Clement
+*A Fire Upon the Deep - Vinge
+*A Deepness in the Sky - Vinge
+*Collected Stories of Vernor Vinge - Vinge
+*Tatja Grimm's World - Vinge
+True Names and the Opening of the Cyberspace Frontier - Vinge
+Hyperion - Simmons
+Fall of Hyperion - Simmons
+The Terror - Simmons
+Endymion - Simmons
+Watership Down - Adams
+War of the End of the World - Llosa
+Years of Rice and Salt - Robinson
+Feersum Endjin - Banks
+Algebraist - Banks
+State of the Art - Banks
+*Matter - Banks
+*Surface Detail - Banks
+Axis - Wilson
+Blind Lake - Wilson
+Chronoliths - Wilson
+Mysterium - Wilson
+Darwinia - Wilson
+Spin - Wilson
+Quiet War - McAuley
+Gardens of the Sun - McAuley
+After Dark - Murakami
+Hard Boiled Wonderland and the End of the World - Murakami
+Wild Sheep Chase - Murakami
+21 Great Stories - Lass, Tasman
+Door into Summer - Heinlein
+Unreasoning Mask - Farmer
+Lathe of Heaven - Le Guin
+Pleasure of Finding Things Out - Feynman
+I'm a Stranger Here Myself - Bryson
+Dragon's Egg - Forward
+Dreaming in Code - Rosenberg
+Soul of a New Machine - Kidder
+Riddley Walker - Hoban
+Grapes of Wrath - Steinbeck
+We Have Always Lived in the Castle - Jackson
+On the Cosmic Horizon - Bennett
+Little Schemer - Friedman, Felleisen
+Songs of a Distant Earth - Clarke
+Code Book - Singh
+Wake Up, Sir! - Ames
+Thinkertoys - Michalko
+Do Androids Dream of Electric Sheep? - Dick
+Man in the High Castle - Dick
+A Scanner Darkly - Dick
+In Persuasion Nation - Suanders
+Mutants - Leroi
+Algorithms - C, L, R
+Brave New World - Huxley
+Life of Pi - Martel
+Cyberabad Days - McDonald
+Windows Graphics Programming - Yuan
+Design Patterns - Gang of Four
+Computer Networks - Peterson, Davie
+Stories of Your Life and Others - Chiang
+Wide Sargasso Sea - Rhys
+Invisible Monsters - Palahniuk
+Lullaby - Palahniuk
+Marooned in Realtime - Vinge
+Diamond Age - Stephenson
+My Life on the Run - Yasso
+Cyclepedia - Embacher
+Structure and Interpretation of Computer Programs - Ableson, Sussman
+*The Peace War - Vinge
+*The Penultimate Truth - Dick
+Crime and Punishment - Dostoevsky
+*Flow My Tears, the Policeman Said - Dick
+*Ubik - Dick
+Tokyo Stories - Rogers
+*A Swiftly Tilting Planet - L'engle
+*A Wind in the Door - L'engle
+*A Wrinkle in Time - L'engle
+Alice's Adventures in Wonderland - Carroll
+Through the Looking Glass - Carroll
+*Brainwave - Anderson
+*The Elephant Vanishes - Murakami
+Short Story Masterpieces - Warren, Erskine
+Shalimar the Clown - Rushdie
+The Ultimate Hitchiker's Guide to the Galaxy - Adams
+*Neverwhere - Gaiman
+Inherit The Stars - Hogan
+Effective C++ - Meyers
+More Effective C++ - Meyers
+*Cat's Cradle - Vonnegut
+Physics for Scientists and Engineers - Serway
+Haskell School of Expression - Hudak
+Probability and Statistics for Engineering and the Sciences - Devore
+Elements of the Theory of Computation - Lewis, Papadimitriou
+Introductory Chemistry: A Foundation - Zumdahl
+Henry Thoreau: A Life of the Mind - Richardson
+Godel, Escher, Bach - Hofstadler
+Pogo Revisited (Instant Pogo, Jack Acid Society Black Book, Pogo Poop Book) - Kelly
+Dispatches from the Tenth Circle - Onion
+Computer Systems Design and Architecture - Heuring, Jordan
+Modern Physics - Dipler, Llewellyn
+Calculus with Analytic Geometry - Ellis, Gulick
+Practical Guide to Linux - Sobell
+Applied Numerical Analysis Using Matlab - Fausett
+Fermat's Enigma - Singh
+About this Life - Lopez
+Bicycle - Herlihy
+Walden and Other Writings (Modern Library) - Thoreau
+Encyclopedia of Japanese Pop Culture - Schilling
+*Edgar Sawtell - Wroblewski
+Plato and a Platypus - Cathcart, Klein
+Judas Unchained - Hamilton
+Pandora's Star - Hamilton
+Naked God - Hamilton
+Temporal Void - Hamilton
+Dreaming Void - Hamilton
+Neutronium Alchemist - Hamilton
+Evolutionary Void - Hamilton
+Reality Dysfunction - Hamilton
+Fallen Dragon - Hamilton
+*The Disposessed - Le Guin
+*Against a Dark Background - Banks
+*Player of Games - Banks
+*Consider Phlebas - Banks
+Excession - Banks
+*Use of Weapons - Banks
+*Look to Windward - Banks
+Inversions - Banks
+*Transition - Banks
+*The Lucky Strike, plus ... - Robinson
+*Cowboy Angels - McAuley
+Glass Bees - Junger
+*Blind Willow, Sleeping Woman - Murakami
+Rise of Endymion - Simmons
+Roughing It - Twain
+*Mona Lisa Overdrive - Gibson
+*Axiomatic - Egan
+Dark Integers and Other Stories - Egan
+*Children's Hospital - Adrian
+*To Outlive Eternity and Other Stories - Anderson
+Windows Internals - Russinovich, Solomon
+Transactional Information Systems - Weikum and Vossen
+*Chaos - Gleick
+*Curious Incident of the Dog in the Night-time - Haddon
+Long Walk - Raswicz
+Schismatrix Plus - Sterling
+Anthropologist on Mars - Sachs
+Man Who Turned into Himself - Ambrose
+Concepts of Programming Languages - Sebesta
+Intro to Cryptography with Coding Theory - Trappe, Washington
+World Without Us - Weisman
+Midnight's Children - Rushdie
