@@ -1,6 +1,11 @@
 (setq load-path (cons "/home/dicej/.lisp/" load-path))
 
-(require 'lazy-lock)
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
+(package-initialize)
+
+;;(require 'lazy-lock)
 
 ;; Turn on font-lock mode for Emacs
 (global-font-lock-mode t)
@@ -16,11 +21,21 @@
 
 ;(set-variable 'show-trailing-whitespace t)
 
+(add-hook 'before-save-hook 'whitespace-cleanup)
+
+; addresses weird terminal corruption due to Emacs concurrency bug
+; when is most noticeable under VirtualBox with more than one CPU:
+(add-hook 'isearch-update-post-hook 'redraw-display)
+
 ;; scheme indentation rules
 (put 'with 'scheme-indent-function 1)
 (put 'if 'scheme-indent-function 1)
 (put 'when 'scheme-indent-function 1)
 (put 'unless 'scheme-indent-function 1)
+
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+
+(add-hook 'purescript-mode-hook 'turn-on-purescript-indentation)
 
 ;; no tabs for you!
 (setq-default indent-tabs-mode nil)
@@ -31,7 +46,7 @@
 ;(global-set-key [C-M-tab] 'clang-format-region)
 
 ;; no menu bar for you!
-(menu-bar-mode nil)
+(menu-bar-mode -1)
 
 ;; no startup message.
 (setq inhibit-startup-message t)
@@ -155,18 +170,24 @@
 (global-set-key (kbd "C-%") 'mqr-auto-replace)
 
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(CUA-mode-inhibit-method (quote twice))
  '(blink-matching-paren nil)
- '(c++-font-lock-extra-types (quote ("\\sw+_t" "\\([iof]\\|str\\)+stream\\(buf\\)?" "ios" "string" "rope" "list" "slist" "deque" "vector" "bit_vector" "set" "multiset" "map" "multimap" "hash\\(_\\(m\\(ap\\|ulti\\(map\\|set\\)\\)\\|set\\)\\)?" "stack" "queue" "priority_queue" "type_info" "iterator" "const_iterator" "reverse_iterator" "const_reverse_iterator" "reference" "const_reference")))
+ '(c++-font-lock-extra-types
+   (quote
+    ("\\sw+_t" "\\([iof]\\|str\\)+stream\\(buf\\)?" "ios" "string" "rope" "list" "slist" "deque" "vector" "bit_vector" "set" "multiset" "map" "multimap" "hash\\(_\\(m\\(ap\\|ulti\\(map\\|set\\)\\)\\|set\\)\\)?" "stack" "queue" "priority_queue" "type_info" "iterator" "const_iterator" "reverse_iterator" "const_reverse_iterator" "reference" "const_reference")))
  '(c++-mode-hook (quote ((lambda nil (setq tab-width 8)))))
- '(c-basic-offset 2)
+ '(c-basic-offset 4)
  '(c-font-lock-extra-types (quote ("FILE" "\\sw+_t" "Lisp_Object" "wx.*")))
  '(c-mode-hook (quote ((lambda nil (setq tab-width 8)))))
- '(c-offsets-alist (quote ((innamespace . 0) (substatement-open . 0) (access-label . -1))))
+ '(c-offsets-alist
+   (quote
+    ((innamespace . 0)
+     (substatement-open . 0)
+     (access-label . -1))))
  '(c-syntactic-indentation t)
  '(confirm-kill-emacs nil)
  '(cua-enable-cua-keys nil)
@@ -175,12 +196,17 @@
  '(focus-follows-mouse nil)
  '(font-lock-global-modes t)
  '(font-lock-maximum-decoration (quote ((t . t) (java-mode . t) (c++-mode . t))))
- '(font-lock-support-mode (quote lazy-lock-mode))
  '(font-lock-verbose nil)
  '(java-font-lock-extra-types (quote ("[A-ZР-жи-п]\\sw*[a-z]\\sw*" "URL")))
- '(java-mode-hook (quote ((lambda nil (setq tab-width 8)) (lambda nil "Treat Java 1.5 @-style annotations as comments." (setq c-comment-start-regexp "\\(@\\|/\\(/\\|[*][*]?\\)\\)") (modify-syntax-entry 64 "< b" java-mode-syntax-table)))))
+ '(java-mode-hook
+   (quote
+    ((lambda nil
+       (setq tab-width 8))
+     (lambda nil "Treat Java 1.5 @-style annotations as comments."
+       (setq c-comment-start-regexp "\\(@\\|/\\(/\\|[*][*]?\\)\\)")
+       (modify-syntax-entry 64 "< b" java-mode-syntax-table)))))
  '(jit-lock-stealth-time 1)
- '(lazy-lock-defer-time 4)
+ '(js-indent-level 2)
  '(mode-line-format (quote (" %70b" "%5l (%*)")))
  '(mouse-avoidance-mode nil nil (avoid))
  '(mouse-wheel-follow-mouse t)
@@ -194,8 +220,9 @@
  '(show-paren-mode t nil (paren))
  '(show-paren-style (quote parenthesis))
  '(show-trailing-whitespace nil)
- '(standard-indent 2)
+ '(standard-indent 4)
  '(tooltip-mode nil nil (tooltip))
+ '(typescript-indent-level 2)
  '(undo-limit 2000000)
  '(undo-outer-limit 30000000)
  '(undo-strong-limit 3000000))
@@ -204,3 +231,12 @@
 
 ;; Disable indentation when in namespace blocks.
 (c-set-offset 'innamespace 0)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+;; (load-file (let ((coding-system-for-read 'utf-8))
+;;              (shell-command-to-string "agda-mode locate")))
