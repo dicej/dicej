@@ -23,9 +23,20 @@
 
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
+(require 'google-java-format)
+(add-hook 'before-save-hook 'google-java-format-buffer)
+
+(setq visible-cursor nil)
+
+(setq rust-format-on-save t)
+
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . web-mode))
+
 ; addresses weird terminal corruption due to Emacs concurrency bug
 ; when is most noticeable under VirtualBox with more than one CPU:
-(add-hook 'isearch-update-post-hook 'redraw-display)
+;(add-hook 'isearch-update-post-hook 'redraw-display)
 
 ;; scheme indentation rules
 (put 'with 'scheme-indent-function 1)
@@ -180,7 +191,7 @@
    (quote
     ("\\sw+_t" "\\([iof]\\|str\\)+stream\\(buf\\)?" "ios" "string" "rope" "list" "slist" "deque" "vector" "bit_vector" "set" "multiset" "map" "multimap" "hash\\(_\\(m\\(ap\\|ulti\\(map\\|set\\)\\)\\|set\\)\\)?" "stack" "queue" "priority_queue" "type_info" "iterator" "const_iterator" "reverse_iterator" "const_reverse_iterator" "reference" "const_reference")))
  '(c++-mode-hook (quote ((lambda nil (setq tab-width 8)))))
- '(c-basic-offset 4)
+ '(c-basic-offset 2)
  '(c-font-lock-extra-types (quote ("FILE" "\\sw+_t" "Lisp_Object" "wx.*")))
  '(c-mode-hook (quote ((lambda nil (setq tab-width 8)))))
  '(c-offsets-alist
@@ -220,12 +231,15 @@
  '(show-paren-mode t nil (paren))
  '(show-paren-style (quote parenthesis))
  '(show-trailing-whitespace nil)
- '(standard-indent 4)
+ '(standard-indent 2)
  '(tooltip-mode nil nil (tooltip))
  '(typescript-indent-level 2)
  '(undo-limit 2000000)
  '(undo-outer-limit 30000000)
- '(undo-strong-limit 3000000))
+ '(undo-strong-limit 3000000)
+ '(web-mode-code-indent-offset 2)
+ '(web-mode-css-indent-offset 2)
+ '(web-mode-markup-indent-offset 2))
 
 (put 'upcase-region 'disabled nil)
 

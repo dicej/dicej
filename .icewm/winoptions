@@ -15,7 +15,7 @@ AddressBook.Netscape.icon: communicator-abook
 AWTapp.icon: java
 xv.icon: xv
 xload.icon: xload
-mozillaComponentBar.icon: netscape 
+mozillaComponentBar.icon: netscape
 mozillaComponentBar.layer: OnTop
 mozillaComponentBar.ignoreTaskBar: 1
 #mozillaComponentBar.ignoreWinList: 1
@@ -72,8 +72,8 @@ Pidgin.Pidgin.layer: OnTop
 
 toolbox.Gimp.layer: OnTop
 
-Gnubiff.allWorkspaces: 1
-Gnubiff.layer: "Above Dock"
+#Gnubiff.allWorkspaces: 1
+#Gnubiff.layer: "Above Dock"
 
 Xmessage.allWorkspaces: 1
 Xmessage.layer: OnTop

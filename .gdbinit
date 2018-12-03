@@ -9,3 +9,4 @@ handle SIGUSR2 nostop noprint pass
 handle SIG62 nostop noprint pass
 set pagination off
 set unwindonsignal on
+set print thread-events off

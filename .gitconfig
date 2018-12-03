@@ -6,3 +6,5 @@
 [review "https://android-review.googlesource.com/"]
        autoupload = true
        username = "git-joel.dice.gmail.com"
+[commit]
+	template = /home/dicej/.git_commit_msg.txt

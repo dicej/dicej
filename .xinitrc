@@ -3,10 +3,13 @@
 # actually, leave the bell on (xterm and emacs can be set to 'visual bell')
 xset m 3/2 16
 
+# use "clickfinger" instead of "buttonareas"
+xinput set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Click Method Enabled' {0, 1}
+
 # make Caps Lock another Ctrl key
-#xmodmap -e 'remove Lock = Caps_Lock'
-#xmodmap -e 'add Control = Caps_Lock'
-#xmodmap -e 'keycode 66 = Control_L'
+xmodmap -e 'remove Lock = Caps_Lock'
+xmodmap -e 'add Control = Caps_Lock'
+xmodmap -e 'keycode 66 = Control_L'
 # for training purposes:
 #xmodmap -e 'remove Control = Control_L'
 
@@ -37,4 +40,11 @@ xmodmap -e 'add Control = Control_R'
 
 # start the window manager
 xsetroot -solid black
-ssh-agent /usr/local/icewm/bin/icewm
+if xrandr | grep "HDMI-1 disconnected"; then
+    :
+else
+  xrandr --output HDMI-1 --primary --left-of eDP-1
+  xrandr --output eDP-1 --pos 1920x120
+fi
+xss-lock slock &
+ssh-agent /home/dicej/local/icewm/bin/icewm

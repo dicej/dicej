@@ -81,7 +81,7 @@ SizeMaximized=1 # 0/1
 
 #  Place the mini-icons horizontal instead of vertical
 # MiniIconsPlaceHorizontal=0 # 0/1
-    
+
 #  Place new mini-icons from right to left
 # MiniIconsRightToLeft=0 # 0/1
 
@@ -203,7 +203,9 @@ QuickSwitchFillSelection=1 # 0/1
 TaskBarShowClock=0 # 0/1
 
 #  Show APM status on task bar
-# TaskBarShowAPMStatus=0 # 0/1
+TaskBarShowAPMStatus=0 # 0/1
+
+TaskBarShowAPMAuto=0 # 0/1
 
 #  Show APM status on task bar in time-format
 # TaskBarShowAPMTime=1 # 0/1
@@ -247,8 +249,10 @@ TaskBarShowStartMenu=0 # 0/1
 #  Show 'window list' menu on task bar
 TaskBarShowWindowListMenu=0 # 0/1
 
-#  Show CPU status on task bar (Linux 		& Solaris)
+#  Show CPU status on task bar (Linux     & Solaris)
 TaskBarShowCPUStatus=0 # 0/1
+
+TaskBarShowMEMStatus
 
 #  Show network status on task bar (Linux only)
 TaskBarShowNetStatus=0 # 0/1
