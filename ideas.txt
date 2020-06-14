@@ -1,0 +1,25 @@
+front end engine
+  proc macro for defining tables and named prepared statements
+    tables represent the normalized app model
+    prepared statements
+      generate methods with given names
+      generate incrementally-updated indexes
+      prepared select statements
+        really just materialized views with parameter placeholders
+        generate model method for querying during updates
+        generate rerenderer method
+      prepared update/insert/delete statements
+        generate model method for updating/inserting/deleting
+    model is backed by revori-style persistent tree
+      not directly exposed to app
+  renderer
+    ctor takes initial model
+    app renders dom using e.g. typed-html macro, optionally using renderer to generate parts
+    renderer methods (defined by select statements above)
+      take function which takes query row result items as parameters and returns vector of dom node
+      return vector of RCs to dom nodes produced by calling above function
+      stores function and RCs to dom nodes internally for rerenders later
+    app can define loop that updates the model and passes result to renderer
+      renderer diffs old model with new model
+      maps diff elements to any functions and RCs of dom nodes and rerenders
+      todo: how do rerenders propagate to real dom?
