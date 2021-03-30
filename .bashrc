@@ -84,3 +84,5 @@ export NVM_DIR="/home/dicej/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 [[ -s "/home/dicej/.gvm/scripts/gvm" ]] && source "/home/dicej/.gvm/scripts/gvm"
+alias cerbero='~/Downloads/cerbero/cerbero-uninstalled'
+
