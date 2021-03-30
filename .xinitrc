@@ -5,6 +5,7 @@ xset m 3/2 16
 
 # use "clickfinger" instead of "buttonareas"
 xinput set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Click Method Enabled' {0, 1}
+xinput set-prop 'Synaptics TM3289-021' 'libinput Click Method Enabled' {0, 1}
 
 # make Caps Lock another Ctrl key
 xmodmap -e 'remove Lock = Caps_Lock'
@@ -19,6 +20,17 @@ xmodmap -e 'add Control = Control_L'
 xmodmap -e 'keycode 134 = Control_R'
 xmodmap -e 'remove mod4 = Control_R'
 xmodmap -e 'add Control = Control_R'
+
+# Use only key pad arrow keys
+xmodmap -e 'keycode 111 ='
+xmodmap -e 'keycode 113 ='
+xmodmap -e 'keycode 114 ='
+xmodmap -e 'keycode 116 ='
+xmodmap -e 'keycode 88 = Down'
+xmodmap -e 'keycode 84 = Down'
+xmodmap -e 'keycode 83 = Left'
+xmodmap -e 'keycode 85 = Right'
+xmodmap -e 'keycode 80 = Up'
 
 #xmodmap -e 'keycode 115 = Control_L'
 #xmodmap -e 'add Control = Control_L'
@@ -40,11 +52,11 @@ xmodmap -e 'add Control = Control_R'
 
 # start the window manager
 xsetroot -solid black
-if xrandr | grep "HDMI-1 disconnected"; then
+if xrandr | grep -q "HDMI-1 disconnected"; then
     :
 else
   xrandr --output HDMI-1 --primary --left-of eDP-1
   xrandr --output eDP-1 --pos 1920x120
 fi
-xss-lock slock &
-ssh-agent /home/dicej/local/icewm/bin/icewm
+#xss-lock slock &
+ssh-agent /home/jdice/local/icewm/bin/icewm

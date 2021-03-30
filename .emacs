@@ -1,9 +1,20 @@
-(setq load-path (cons "/home/dicej/.lisp/" load-path))
+(setq load-path (cons "/home/jdice/.lisp/" load-path))
 
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
+       '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
+
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(toggle-scroll-bar -1)
+
+(defun beautify-json ()
+  (interactive)
+  (let ((b (if mark-active (min (point) (mark)) (point-min)))
+        (e (if mark-active (max (point) (mark)) (point-max))))
+    (shell-command-on-region b e
+     "python -m json.tool" (current-buffer) t)))
 
 ;;(require 'lazy-lock)
 
@@ -24,7 +35,11 @@
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
 (require 'google-java-format)
-(add-hook 'before-save-hook 'google-java-format-buffer)
+(add-hook 'java-mode-hook
+          (function (lambda ()
+                      (add-hook 'before-save-hook 'google-java-format-buffer))))
+
+(add-hook 'rust-mode-hook (lambda () (set-fill-column 115)))
 
 (setq visible-cursor nil)
 
@@ -53,33 +68,40 @@
 
 (setq default-tab-width 2)
 
-;(load "/usr/share/emacs/site-lisp/clang-format-3.5/clang-format.el")
-;(global-set-key [C-M-tab] 'clang-format-region)
-
-;; no menu bar for you!
-(menu-bar-mode -1)
+(load "/usr/share/emacs/site-lisp/clang-format-6.0/clang-format.el")
+(global-set-key [C-M-tab] 'clang-format-region)
+(add-hook 'c-mode-hook
+          (function (lambda ()
+                    (add-hook 'before-save-hook
+                              'clang-format-buffer))))
+(add-hook 'c++-mode-hook
+          (function (lambda ()
+                    (add-hook 'before-save-hook
+                              'clang-format-buffer))))
 
 ;; no startup message.
 (setq inhibit-startup-message t)
 
 (setq initial-frame-alist
       (append
-       '((width . 80) (height . 24) ;; (internal-border-width . 2)
-         (left-fringe . 0) (right-fringe . 0)
-         (line-space . "0"))
+       '((width . 120) (height . 74) ;; (internal-border-width . 2)
+   (vertical-scroll-bars . nil)
+   (left-fringe . 0) (right-fringe . 0)
+   (line-space . "0"))
        initial-frame-alist))
 
 (setq default-frame-alist
       (append
-       '((width . 80) (height . 24) ;; (internal-border-width . 2)
-         (left-fringe . 0) (right-fringe . 0)
-         (line-space . "0"))
+       '((width . 120) (height . 74) ;; (internal-border-width . 2)
+   (vertical-scroll-bars . nil)
+   (left-fringe . 0) (right-fringe . 0)
+   (line-space . "0"))
        default-frame-alist))
 
 ;; Put autosave files (ie #foo#) in one place, *not* scattered all over the
 ;; file system! (The make-autosave-file-name function is invoked to determine
 ;; the filename of an autosave file.)
-(defvar autosave-dir (concat "/tmp/emacs_autosaves/" (user-login-name) "/"))
+(defvar autosave-dir (concat "/home/" (user-login-name) "/emacs_autosaves/"))
 (make-directory autosave-dir t)
 
 (defun auto-save-file-name-p (filename) (string-match "^#.*#$" (file-name-nondirectory filename)))
@@ -164,6 +186,11 @@
 (global-set-key [mouse-4] 'down-wheel)
 (global-set-key [mouse-5] 'up-wheel)
 
+(define-key input-decode-map "\e\eOA" [(meta up)])
+(define-key input-decode-map "\e\eOB" [(meta down)])
+(global-set-key (kbd "<M-up>") (quote scroll-up-line))
+(global-set-key (kbd "<M-down>") (quote scroll-down-line))
+
 (defun up-one () (interactive) (scroll-up 1))
 (defun down-one () (interactive) (scroll-down 1))
 (global-set-key [C-mouse-4] 'down-one)
@@ -204,6 +231,7 @@
  '(cua-enable-cua-keys nil)
  '(display-hourglass nil)
  '(display-time-mode nil)
+ '(fill-column 80)
  '(focus-follows-mouse nil)
  '(font-lock-global-modes t)
  '(font-lock-maximum-decoration (quote ((t . t) (java-mode . t) (c++-mode . t))))
@@ -245,12 +273,32 @@
 
 ;; Disable indentation when in namespace blocks.
 (c-set-offset 'innamespace 0)
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
+(when (display-graphic-p)
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(default ((t (:inherit nil :stipple nil :background "black" :foreground "rgb:dd/dd/dd" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 105 :width normal :foundry "misc" :family "fixed"))))
+   '(font-lock-comment-face ((((class color) (background dark)) (:foreground "rgb:dd/66/66"))))
+   '(font-lock-constant-face ((((class color) (background dark)) (:foreground "rgb:99/ff/dd"))))
+   '(font-lock-doc-face ((t (:foreground "rgb:dd/88/88"))))
+   '(font-lock-keyword-face ((((class color) (background dark)) (:foreground "rgb:99/ff/ff"))))
+   '(font-lock-string-face ((((class color) (background dark)) (:foreground "rgb:ff/b0/aa"))))
+   '(font-lock-type-face ((((class color) (background dark)) (:foreground "rgb:bb/ff/bb"))))
+   '(font-lock-variable-name-face ((((class color) (background dark)) (:foreground "rgb:ff/ee/dd"))))
+   '(fringe ((t (:background "rgb:0/0/0"))))
+   '(header-line ((((class color grayscale) (background dark)) (:inherit mode-line :foreground "grey90" :box nil))))
+   '(minibuffer-prompt ((((background dark)) (:foreground "rgb:99/ff/dd"))))
+   '(mode-line ((t (:background "black" :foreground "rgb:92/9f/bb" :box nil :overline "rgb:82/8f/ab"))))
+   '(mode-line-inactive ((t (:inherit mode-line :background "black"))))
+   '(region ((((class color) (background dark)) (:background "rgb:33/66/99"))))
+   '(sh-heredoc ((((min-colors 88) (class color) (background dark)) (:inherit font-lock-string-face))))
+   '(sh-heredoc-face ((((class color) (background dark)) (:foreground "rgb:dd/ff/dd"))) t)
+   '(show-paren-match ((((class color) (background dark)) (:background "rgb:00/44/77"))))
+   '(trailing-whitespace ((((class color) (background dark)) (:foreground "red" :underline t))))
+   '(vhdl-font-lock-reserved-words-face ((t (:foreground "rgb:bb/ff/bb"))))))
 
 ;; (load-file (let ((coding-system-for-read 'utf-8))
 ;;              (shell-command-to-string "agda-mode locate")))

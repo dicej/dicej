@@ -10,6 +10,9 @@ key "Alt+Ctrl+Esc"              sudo /sbin/poweroff
 key "Alt+Ctrl+z"                zzz.sh
 key "Alt+Ctrl+l"                lock.sh
 
+key "Alt+Ctrl+1" bash -c "xrandr --output HDMI-2 --off --output HDMI-1 --off --output DP-1 --off --output eDP-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-2 --off && bash /home/jdice/bin/keyboard.sh"
+key "Alt+Ctrl+2" bash -c "xrandr --output HDMI-2 --off --output HDMI-1 --primary --mode 1920x1200 --pos 0x0 --rotate normal --output DP-1 --off --output eDP-1 --mode 1920x1080 --pos 1920x120 --rotate normal --output DP-2 --off && bash /home/jdice/bin/keyboard.sh"
+
 key "Alt+Ctrl+t"		xterm
 key "Alt+Ctrl+e"		emacs
 key "Alt+Ctrl+m"		xterm -exec pine
@@ -29,6 +32,6 @@ key "XF86AudioMute"		aumix -v 0
 key "XF86AudioPlay"		cdplay play 1
 key "XF86AudioStop"		cdplay stop
 key "XF86HomePage"		netscape -noraise -remote openHomepage
-key "XF86Mail"			netscape -noraise -remote openURL(mailto:,new-window) 
+key "XF86Mail"			netscape -noraise -remote openURL(mailto:,new-window)
 key "XF86Search"		netscape -noraise -remote openURL(http://www.google.com/)
 key "XF86Eject"			eject
