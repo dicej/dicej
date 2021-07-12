@@ -1,6 +1,7 @@
 prog terminal xterm rxvt-unicode +sb -si -sw -sk -fn 7x14 -fb 7x14bold -bg rgb:02/0d/1c -fg white -sl 10000
 prog wide xterm rxvt-unicode +sb -si -sw -sk -fn 7x14 -fb 7x14bold -bg rgb:02/0d/1c -fg white -sl 10000 -geometry 120x83
 prog firefox firefox firefox
+prog emacs emacs emacs
 separator
 menu system folder {
      restart icewm - icewm

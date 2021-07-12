@@ -10,8 +10,9 @@ key "Alt+Ctrl+Esc"              sudo /sbin/poweroff
 key "Alt+Ctrl+z"                zzz.sh
 key "Alt+Ctrl+l"                lock.sh
 
-key "Alt+Ctrl+1" bash -c "xrandr --output HDMI-2 --off --output HDMI-1 --off --output DP-1 --off --output eDP-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-2 --off && bash /home/jdice/bin/keyboard.sh"
-key "Alt+Ctrl+2" bash -c "xrandr --output HDMI-2 --off --output HDMI-1 --primary --mode 1920x1200 --pos 0x0 --rotate normal --output DP-1 --off --output eDP-1 --mode 1920x1080 --pos 1920x120 --rotate normal --output DP-2 --off && bash /home/jdice/bin/keyboard.sh"
+key "Alt+Ctrl+1" bash -c "xrandr --output HDMI-2 --off --output HDMI-1 --off --output DP-1 --off --output eDP-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-2 --off && bash /home/dicej/bin/keyboard.sh && killall -SIGHUP icewm"
+key "Alt+Ctrl+2" bash -c "xrandr --output HDMI-2 --off --output HDMI-1 --primary --mode 2560x1440 --pos 0x0 --rotate normal --output DP-1 --off --output eDP-1 --mode 1920x1080 --pos 2560x360 --rotate normal --output DP-2 --off && bash /home/dicej/bin/keyboard.sh && killall -SIGHUP icewm"
+key "Alt+Ctrl+3" bash -c "killall -SIGHUP icewm && bash /home/dicej/bin/keyboard.sh"
 
 key "Alt+Ctrl+t"		xterm
 key "Alt+Ctrl+e"		emacs

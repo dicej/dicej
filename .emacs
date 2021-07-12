@@ -1,4 +1,4 @@
-(setq load-path (cons "/home/jdice/.lisp/" load-path))
+(setq load-path (cons "/home/dicej/.lisp/" load-path))
 
 (require 'package)
 (add-to-list 'package-archives
@@ -8,6 +8,8 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (toggle-scroll-bar -1)
+
+(delete-selection-mode 1)
 
 (defun beautify-json ()
   (interactive)
@@ -68,7 +70,7 @@
 
 (setq default-tab-width 2)
 
-(load "/usr/share/emacs/site-lisp/clang-format-6.0/clang-format.el")
+(load "/usr/share/emacs/site-lisp/clang-format/clang-format.el")
 (global-set-key [C-M-tab] 'clang-format-region)
 (add-hook 'c-mode-hook
           (function (lambda ()
@@ -249,6 +251,9 @@
  '(mode-line-format (quote (" %70b" "%5l (%*)")))
  '(mouse-avoidance-mode nil nil (avoid))
  '(mouse-wheel-follow-mouse t)
+ '(package-selected-packages
+   (quote
+    (yaml-mode dockerfile-mode terraform-mode web-mode rust-mode)))
  '(perl-indent-level 2)
  '(pmd-home "/home/code/local/pmd")
  '(pmd-java-home "/home/code/local/jdk/bin/java")
@@ -299,6 +304,3 @@
    '(show-paren-match ((((class color) (background dark)) (:background "rgb:00/44/77"))))
    '(trailing-whitespace ((((class color) (background dark)) (:foreground "red" :underline t))))
    '(vhdl-font-lock-reserved-words-face ((t (:foreground "rgb:bb/ff/bb"))))))
-
-;; (load-file (let ((coding-system-for-read 'utf-8))
-;;              (shell-command-to-string "agda-mode locate")))

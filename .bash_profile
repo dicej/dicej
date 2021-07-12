@@ -15,7 +15,7 @@ export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 #export ANT_HOME=$HOME/p/apache-ant-1.7.1
 #export ANT_OPTS="-Xmx1024m -Xss512k"
 
-export PATH=/usr/bin:/snap/bin:${HOME}/Downloads/FlameGraph:${HOME}/Qt5.10.0/Tools/QtCreator/bin:${HOME}/Downloads/node-v10.15.0-linux-x64/bin:${HOME}/trash/depot_tools:${HOME}/trash/p/gradle-1.2/bin/:/sbin:/bin:/usr/sbin/:/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/X11R6/bin:/opt/mac/bin:$HOME/.cabal/bin:/usr/lib/llvm-2.7/bin:${HOME}/.local/bin:${HOME}/bin:${HOME}/Android/Sdk/platform-tools:
+export PATH=/usr/bin:/snap/bin:${HOME}/Downloads/depot_tools::/sbin:/bin:/usr/sbin/:/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/X11R6/bin:${HOME}/bin:${HOME}/Android/Sdk/platform-tools:
 #$HOME/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/bin:$HOME/Downloads/depot_tools/:
 
 export ANDROID_HOME=${HOME}/Android/Sdk/
@@ -24,6 +24,7 @@ export CLASSPATH=".:/usr/local/lib/antlr-4.5.2-complete.jar"
 
 export GRADLE_OPTS="-Dorg.gradle.daemon=true"
 
+export LD_LIBRARY_PATH=/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/server
 #export LD_LIBRARY_PATH=${HOME}/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib
 #export LD_LIBRARY_PATH=/usr/local/gmp-4.3.2/lib/:/usr/local/mpfr-2.4.2/lib:/usr/local/mpc-0.8.1/lib
 
