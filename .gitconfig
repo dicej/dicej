@@ -1,10 +1,8 @@
 [user]
         name = "Joel Dice"
         email = "joel.dice@gmail.com"
-[color]
-	ui = auto
-[review "https://android-review.googlesource.com/"]
-       autoupload = true
-       username = "git-joel.dice.gmail.com"
-[commit]
-	template = /home/dicej/.git_commit_msg.txt
+        signingkey = 7C01F00E4C7569C9
+
+[alias]
+  cf = -c user.name='Joel Dice' -c user.email='joel.dice@fermyon.com' commit -s -Sjoel.dice@fermyon.com
+  rb = rebase -Sjoel.dice@fermyon.com

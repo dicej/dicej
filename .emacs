@@ -7,7 +7,7 @@
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
-(toggle-scroll-bar -1)
+;;(toggle-scroll-bar -1)
 
 (delete-selection-mode 1)
 
@@ -34,18 +34,21 @@
 
 ;(set-variable 'show-trailing-whitespace t)
 
-(add-hook 'before-save-hook 'whitespace-cleanup)
+;(add-hook 'before-save-hook 'whitespace-cleanup)
 
-(require 'google-java-format)
-(add-hook 'java-mode-hook
-          (function (lambda ()
-                      (add-hook 'before-save-hook 'google-java-format-buffer))))
+;;(require 'google-java-format)
+;;(add-hook 'java-mode-hook
+;;          (function (lambda ()
+;;                      (add-hook 'before-save-hook 'google-java-format-buffer))))
 
 (add-hook 'rust-mode-hook (lambda () (set-fill-column 115)))
 
 (setq visible-cursor nil)
 
 (setq rust-format-on-save t)
+
+(setq switch-to-buffer-preserve-window-point t)
+(setq ido-default-buffer-method 'selected-window)
 
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
@@ -70,16 +73,16 @@
 
 (setq default-tab-width 2)
 
-(load "/usr/share/emacs/site-lisp/clang-format/clang-format.el")
-(global-set-key [C-M-tab] 'clang-format-region)
-(add-hook 'c-mode-hook
-          (function (lambda ()
-                    (add-hook 'before-save-hook
-                              'clang-format-buffer))))
-(add-hook 'c++-mode-hook
-          (function (lambda ()
-                    (add-hook 'before-save-hook
-                              'clang-format-buffer))))
+;; (load "/usr/share/emacs/site-lisp/clang-format/clang-format.el")
+;; (global-set-key [C-M-tab] 'clang-format-region)
+;; (add-hook 'c-mode-hook
+;;        (function (lambda ()
+;;                  (add-hook 'before-save-hook
+;;                            'clang-format-buffer))))
+;; (add-hook 'c++-mode-hook
+;;        (function (lambda ()
+;;                  (add-hook 'before-save-hook
+;;                            'clang-format-buffer))))
 
 ;; no startup message.
 (setq inhibit-startup-message t)
@@ -100,20 +103,10 @@
    (line-space . "0"))
        default-frame-alist))
 
-;; Put autosave files (ie #foo#) in one place, *not* scattered all over the
-;; file system! (The make-autosave-file-name function is invoked to determine
-;; the filename of an autosave file.)
-(defvar autosave-dir (concat "/home/" (user-login-name) "/emacs_autosaves/"))
-(make-directory autosave-dir t)
-
-(defun auto-save-file-name-p (filename) (string-match "^#.*#$" (file-name-nondirectory filename)))
-
-(defun make-auto-save-file-name () (concat autosave-dir (if buffer-file-name (concat "#" (file-name-nondirectory buffer-file-name) "#") (expand-file-name (concat "#%" (buffer-name) "#")))))
-
-;; Put backup files (ie foo~) in one place too. (The backup-directory-alist
-;; list contains regexp=>directory mappings; filenames matching a regexp are
-;; backed up in the corresponding directory. Emacs will mkdir it if necessary.)
-(defvar backup-dir (concat "/tmp/emacs_backups/" (user-login-name) "/")) (setq backup-directory-alist (list (cons "." backup-dir)))
+(make-directory "~/.emacs_backups/" t)
+(make-directory "~/.emacs_autosave/" t)
+(setq auto-save-file-name-transforms '((".*" "~/.emacs_autosave/" t)))
+(setq backup-directory-alist '(("." . "~/.emacs_backups/")))
 
 ;; sweet!!
 ;(require 'cua)
@@ -183,10 +176,10 @@
 (setq auto-mode-alist (cons '("\\.h$" . c++-mode) auto-mode-alist))
 
 ;; use mouse wheel
-(defun up-wheel () (interactive) (scroll-up (/ (* (window-height) 1) 2)))
-(defun down-wheel () (interactive) (scroll-down (/ (* (window-height) 1) 2)))
-(global-set-key [mouse-4] 'down-wheel)
-(global-set-key [mouse-5] 'up-wheel)
+;(defun up-wheel () (interactive) (scroll-up (/ (* (window-height) 1) 2)))
+;(defun down-wheel () (interactive) (scroll-down (/ (* (window-height) 1) 2)))
+;(global-set-key [mouse-4] 'down-wheel)
+;(global-set-key [mouse-5] 'up-wheel)
 
 (define-key input-decode-map "\e\eOA" [(meta up)])
 (define-key input-decode-map "\e\eOB" [(meta down)])
@@ -214,20 +207,18 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(CUA-mode-inhibit-method (quote twice))
+ '(CUA-mode-inhibit-method 'twice)
  '(blink-matching-paren nil)
  '(c++-font-lock-extra-types
-   (quote
-    ("\\sw+_t" "\\([iof]\\|str\\)+stream\\(buf\\)?" "ios" "string" "rope" "list" "slist" "deque" "vector" "bit_vector" "set" "multiset" "map" "multimap" "hash\\(_\\(m\\(ap\\|ulti\\(map\\|set\\)\\)\\|set\\)\\)?" "stack" "queue" "priority_queue" "type_info" "iterator" "const_iterator" "reverse_iterator" "const_reverse_iterator" "reference" "const_reference")))
- '(c++-mode-hook (quote ((lambda nil (setq tab-width 8)))))
- '(c-basic-offset 2)
- '(c-font-lock-extra-types (quote ("FILE" "\\sw+_t" "Lisp_Object" "wx.*")))
- '(c-mode-hook (quote ((lambda nil (setq tab-width 8)))))
+   '("\\sw+_t" "\\([iof]\\|str\\)+stream\\(buf\\)?" "ios" "string" "rope" "list" "slist" "deque" "vector" "bit_vector" "set" "multiset" "map" "multimap" "hash\\(_\\(m\\(ap\\|ulti\\(map\\|set\\)\\)\\|set\\)\\)?" "stack" "queue" "priority_queue" "type_info" "iterator" "const_iterator" "reverse_iterator" "const_reverse_iterator" "reference" "const_reference"))
+ '(c++-mode-hook '((lambda nil (setq tab-width 8))))
+ '(c-basic-offset 4)
+ '(c-font-lock-extra-types '("FILE" "\\sw+_t" "Lisp_Object" "wx.*"))
+ '(c-mode-hook '((lambda nil (setq tab-width 8))))
  '(c-offsets-alist
-   (quote
-    ((innamespace . 0)
-     (substatement-open . 0)
-     (access-label . -1))))
+   '((innamespace . +)
+     (substatement-open . +)
+     (access-label . -)))
  '(c-syntactic-indentation t)
  '(confirm-kill-emacs nil)
  '(cua-enable-cua-keys nil)
@@ -236,33 +227,29 @@
  '(fill-column 80)
  '(focus-follows-mouse nil)
  '(font-lock-global-modes t)
- '(font-lock-maximum-decoration (quote ((t . t) (java-mode . t) (c++-mode . t))))
+ '(font-lock-maximum-decoration '((t . t) (java-mode . t) (c++-mode . t)))
  '(font-lock-verbose nil)
- '(java-font-lock-extra-types (quote ("[A-ZР-жи-п]\\sw*[a-z]\\sw*" "URL")))
+ '(java-font-lock-extra-types '("[A-ZР-жи-п]\\sw*[a-z]\\sw*" "URL"))
  '(java-mode-hook
-   (quote
-    ((lambda nil
+   '((lambda nil
        (setq tab-width 8))
      (lambda nil "Treat Java 1.5 @-style annotations as comments."
        (setq c-comment-start-regexp "\\(@\\|/\\(/\\|[*][*]?\\)\\)")
-       (modify-syntax-entry 64 "< b" java-mode-syntax-table)))))
+       (modify-syntax-entry 64 "< b" java-mode-syntax-table))))
  '(jit-lock-stealth-time 1)
- '(js-indent-level 2)
- '(mode-line-format (quote (" %70b" "%5l (%*)")))
+ '(js-indent-level 4)
+ '(mode-line-format '(" %70b" "%5l (%*)"))
  '(mouse-avoidance-mode nil nil (avoid))
  '(mouse-wheel-follow-mouse t)
  '(package-selected-packages
-   (quote
-    (yaml-mode dockerfile-mode terraform-mode web-mode rust-mode)))
+   '(clang-format wat-ts-mode csharp-mode go-mode haskell-mode markdown-mode yaml-mode dockerfile-mode terraform-mode web-mode rust-mode))
  '(perl-indent-level 2)
- '(pmd-home "/home/code/local/pmd")
- '(pmd-java-home "/home/code/local/jdk/bin/java")
- '(pmd-ruleset-list (quote ("rulesets/imports.xml" "rulesets/basic.xml")))
+ '(pmd-ruleset-list '("rulesets/imports.xml" "rulesets/basic.xml"))
  '(sgml-basic-offset 2)
  '(sgml-slash-distance 10000)
  '(sh-basic-offset 2)
  '(show-paren-mode t nil (paren))
- '(show-paren-style (quote parenthesis))
+ '(show-paren-style 'parenthesis)
  '(show-trailing-whitespace nil)
  '(standard-indent 2)
  '(tooltip-mode nil nil (tooltip))
@@ -280,27 +267,53 @@
 (c-set-offset 'innamespace 0)
 
 (when (display-graphic-p)
-  (custom-set-faces
-   ;; custom-set-faces was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   '(default ((t (:inherit nil :stipple nil :background "black" :foreground "rgb:dd/dd/dd" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 105 :width normal :foundry "misc" :family "fixed"))))
-   '(font-lock-comment-face ((((class color) (background dark)) (:foreground "rgb:dd/66/66"))))
-   '(font-lock-constant-face ((((class color) (background dark)) (:foreground "rgb:99/ff/dd"))))
-   '(font-lock-doc-face ((t (:foreground "rgb:dd/88/88"))))
-   '(font-lock-keyword-face ((((class color) (background dark)) (:foreground "rgb:99/ff/ff"))))
-   '(font-lock-string-face ((((class color) (background dark)) (:foreground "rgb:ff/b0/aa"))))
-   '(font-lock-type-face ((((class color) (background dark)) (:foreground "rgb:bb/ff/bb"))))
-   '(font-lock-variable-name-face ((((class color) (background dark)) (:foreground "rgb:ff/ee/dd"))))
-   '(fringe ((t (:background "rgb:0/0/0"))))
-   '(header-line ((((class color grayscale) (background dark)) (:inherit mode-line :foreground "grey90" :box nil))))
-   '(minibuffer-prompt ((((background dark)) (:foreground "rgb:99/ff/dd"))))
-   '(mode-line ((t (:background "black" :foreground "rgb:92/9f/bb" :box nil :overline "rgb:82/8f/ab"))))
-   '(mode-line-inactive ((t (:inherit mode-line :background "black"))))
-   '(region ((((class color) (background dark)) (:background "rgb:33/66/99"))))
-   '(sh-heredoc ((((min-colors 88) (class color) (background dark)) (:inherit font-lock-string-face))))
-   '(sh-heredoc-face ((((class color) (background dark)) (:foreground "rgb:dd/ff/dd"))) t)
-   '(show-paren-match ((((class color) (background dark)) (:background "rgb:00/44/77"))))
-   '(trailing-whitespace ((((class color) (background dark)) (:foreground "red" :underline t))))
-   '(vhdl-font-lock-reserved-words-face ((t (:foreground "rgb:bb/ff/bb"))))))
+  (progn
+    (desktop-save-mode 1)
+    (custom-set-faces
+     ;; custom-set-faces was added by Custom.
+     ;; If you edit it by hand, you could mess it up, so be careful.
+     ;; Your init file should contain only one such instance.
+     ;; If there is more than one, they won't work right.
+     '(default ((t (:inherit nil :stipple nil :background "black" :foreground "rgb:dd/dd/dd" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 105 :width normal :foundry "misc" :family "fixed"))))
+     '(font-lock-comment-face ((((class color) (background dark)) (:foreground "rgb:dd/66/66"))))
+     '(font-lock-constant-face ((((class color) (background dark)) (:foreground "rgb:99/ff/dd"))))
+     '(font-lock-doc-face ((t (:foreground "rgb:dd/88/88"))))
+     '(font-lock-keyword-face ((((class color) (background dark)) (:foreground "rgb:99/ff/ff"))))
+     '(font-lock-string-face ((((class color) (background dark)) (:foreground "rgb:ff/b0/aa"))))
+     '(font-lock-type-face ((((class color) (background dark)) (:foreground "rgb:bb/ff/bb"))))
+     '(font-lock-variable-name-face ((((class color) (background dark)) (:foreground "rgb:ff/ee/dd"))))
+     '(fringe ((t (:background "rgb:0/0/0"))))
+     '(header-line ((((class color grayscale) (background dark)) (:inherit mode-line :foreground "grey90" :box nil))))
+     '(minibuffer-prompt ((((background dark)) (:foreground "rgb:99/ff/dd"))))
+     '(mode-line ((t (:background "black" :foreground "rgb:92/9f/bb" :box nil :overline "rgb:82/8f/ab"))))
+     '(mode-line-inactive ((t (:inherit mode-line :background "black"))))
+     '(region ((((class color) (background dark)) (:background "rgb:33/66/99"))))
+     '(sh-heredoc ((((min-colors 88) (class color) (background dark)) (:inherit font-lock-string-face))))
+     '(sh-heredoc-face ((((class color) (background dark)) (:foreground "rgb:dd/ff/dd"))) t)
+     '(show-paren-match ((((class color) (background dark)) (:background "rgb:00/44/77"))))
+     '(trailing-whitespace ((((class color) (background dark)) (:foreground "red" :underline t))))
+     '(vhdl-font-lock-reserved-words-face ((t (:foreground "rgb:bb/ff/bb")))))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :stipple nil :background "black" :foreground "rgb:dd/dd/dd" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 105 :width normal :foundry "misc" :family "fixed"))))
+ '(font-lock-comment-face ((((class color) (background dark)) (:foreground "rgb:dd/66/66"))))
+ '(font-lock-constant-face ((((class color) (background dark)) (:foreground "rgb:99/ff/dd"))))
+ '(font-lock-doc-face ((t (:foreground "rgb:dd/88/88"))))
+ '(font-lock-keyword-face ((((class color) (background dark)) (:foreground "rgb:99/ff/ff"))))
+ '(font-lock-string-face ((((class color) (background dark)) (:foreground "rgb:ff/b0/aa"))))
+ '(font-lock-type-face ((((class color) (background dark)) (:foreground "rgb:bb/ff/bb"))))
+ '(font-lock-variable-name-face ((((class color) (background dark)) (:foreground "rgb:ff/ee/dd"))))
+ '(fringe ((t (:background "rgb:0/0/0"))))
+ '(header-line ((((class color grayscale) (background dark)) (:inherit mode-line :foreground "grey90" :box nil))))
+ '(minibuffer-prompt ((((background dark)) (:foreground "rgb:99/ff/dd"))))
+ '(mode-line ((t (:background "black" :foreground "rgb:92/9f/bb" :box nil :overline "rgb:82/8f/ab"))))
+ '(mode-line-inactive ((t (:inherit mode-line :background "black"))))
+ '(region ((((class color) (background dark)) (:background "rgb:33/66/99"))))
+ '(sh-heredoc ((((min-colors 88) (class color) (background dark)) (:inherit font-lock-string-face))))
+ '(sh-heredoc-face ((((class color) (background dark)) (:foreground "rgb:dd/ff/dd"))) t)
+ '(show-paren-match ((((class color) (background dark)) (:background "rgb:00/44/77"))))
+ '(trailing-whitespace ((((class color) (background dark)) (:foreground "red" :underline t))))
+ '(vhdl-font-lock-reserved-words-face ((t (:foreground "rgb:bb/ff/bb")))))

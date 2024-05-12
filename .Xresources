@@ -1,9 +1,12 @@
 *visualBell: true
-*Font:       6x13
-*font:       6x13
+*Font:       7x14
+*font:       7x14
 
-Rxvt*font:              6x13
-Rxvt*Font:             6x13
+Rxvt.perl-ext-common: default,font-size
+Rxvt.keysym.C-equal: font-size:increase
+Rxvt*font:              7x14
+Rxvt*boldFont:          7x14bold
+Rxvt*font-size.step:   2
 Rxvt*scrollBar:        False
 Rxvt*saveLines:        10000
 !Rxvt*background:	black
@@ -30,7 +33,7 @@ Rxvt.vt100.translations: #override\n\
 !# japanese!
 ! *inputMethod: kinput2
 
-emacs*Font: 6x13
+emacs*Font: 7x14
 emacs*background: black
 emacs*foreground: white
 emacs*cursorColor: white

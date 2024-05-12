@@ -25,16 +25,12 @@ alias lh='ls -lh'
 
 alias ssh='ssh -t -q'
 
-alias ant='ant -emacs'
 alias ag='sudo apt-get'
 alias ac='apt-cache'
 
 alias em="emacs -q -nw -l ${HOME}/.emacs";
 alias e="emacsclient -nw";
 alias se="sudo emacs -q -nw -l ${HOME}/.emacs";
-
-alias antlr4='java -Xmx500M -cp "/usr/local/lib/antlr-4.5-complete.jar:$CLASSPATH" org.antlr.v4.Tool'
-alias grun='java org.antlr.v4.gui.TestRig'
 
 function sp {
     echo "$@" | ispell -a
@@ -65,15 +61,15 @@ function sp {
 #   PS1="\w$P$C4 $ $C4$P"
 #   PS1="$P$C9[\w]$C9$P\n$P$C10 $ $C10$P"
 #   PS1="$P$C4 \247 $C4$P"
-   if [ "$(hostname)" != "joeldicepc" ]; then
-       PS1="\\[\\033]0;\h::\\w\\007$C4 \h: $P";
-   else
+   # if [ "$(hostname)" != "joeldicepc" ]; then
+   #     PS1="\\[\\033]0;\h::\\w\\007$C4 \h: $P";
+   # else
      if [ -z "$DISPLAY" ]; then
        PS1=" $ "
      else
        PS1="\\[\\033]0;::\\w\\007$C4 $ $P";
      fi
-   fi
+   # fi
 #PS1="\\[\\033]0;::\\w\\007$C10:: $P"
 
 PROMPT_COMMAND="history -a;"
@@ -84,5 +80,6 @@ export NVM_DIR="/home/dicej/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 [[ -s "/home/dicej/.gvm/scripts/gvm" ]] && source "/home/dicej/.gvm/scripts/gvm"
-alias cerbero='~/Downloads/cerbero/cerbero-uninstalled'
 
+# Turso
+export PATH="/home/dicej/.turso:$PATH"
