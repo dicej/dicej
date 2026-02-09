@@ -1,15 +1,21 @@
-(setq load-path (cons "/home/dicej/.lisp/" load-path))
+(setq load-path (cons "/Users/dicej/.lisp/" (cons "/Users/dicej/p/wat-mode" load-path)))
+
+(setenv "PATH" (concat (getenv "PATH") ":/Users/dicej/.cargo/bin:/Users/dicej/.dotnet/tools"))
+(setq exec-path (append exec-path '("/Users/dicej/.cargo/bin")))
+(setq exec-path (append exec-path '("/Users/dicej/.dotnet/tools")))
 
 (require 'package)
 (add-to-list 'package-archives
-       '("melpa" . "https://melpa.org/packages/"))
+       '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
 (menu-bar-mode -1)
-(tool-bar-mode -1)
+(if (display-graphic-p) (tool-bar-mode -1))
 ;;(toggle-scroll-bar -1)
 
 (delete-selection-mode 1)
+
+(require 'wat-mode)
 
 (defun beautify-json ()
   (interactive)
@@ -41,22 +47,45 @@
 ;;          (function (lambda ()
 ;;                      (add-hook 'before-save-hook 'google-java-format-buffer))))
 
-(add-hook 'rust-mode-hook (lambda () (set-fill-column 115)))
+(defun csharpier ()
+  "use shell command to format buffer or region"
+  (interactive)
+  (call-process-region (point-max) (point-min) "/usr/local/share/dotnet/dotnet" t t nil "csharpier" "--write-stdout"))
+
+;; (add-hook 'csharp-mode-hook
+;;           (function (lambda ()
+;;                       (add-hook 'before-save-hook 'csharpier))))
+
+(add-hook 'rust-mode-hook (lambda () (set-fill-column 80)))
+
+;;(add-hook 'window-scroll-functions (lambda (window startp) (redraw-frame)))
+
+;; Save all buffers, including Tramp (i.e. SSH) ones
+(setq desktop-buffers-not-to-save "^$")
+(setq desktop-files-not-to-save "^$")
+
+;; (setq default-frame-alist '((undecorated . t)))
+
+(add-hook 'before-save-hook #'gofmt-before-save)
 
 (setq visible-cursor nil)
 
 (setq rust-format-on-save t)
+(setq rust-rustfmt-switches '("--edition" "2024"))
 
 (setq switch-to-buffer-preserve-window-point t)
 (setq ido-default-buffer-method 'selected-window)
 
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.ts\\'" . web-mode))
+;;(set-default-font "Menlo 12")
+
+;; (require 'web-mode)
+;; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.ts\\'" . web-mode))
 
 ; addresses weird terminal corruption due to Emacs concurrency bug
 ; when is most noticeable under VirtualBox with more than one CPU:
 ;(add-hook 'isearch-update-post-hook 'redraw-display)
+;(setq redisplay-dont-pause t)
 
 ;; scheme indentation rules
 (put 'with 'scheme-indent-function 1)
@@ -89,7 +118,7 @@
 
 (setq initial-frame-alist
       (append
-       '((width . 120) (height . 74) ;; (internal-border-width . 2)
+       '((width . 120) (height . 74) (internal-border-width . 5)
    (vertical-scroll-bars . nil)
    (left-fringe . 0) (right-fringe . 0)
    (line-space . "0"))
@@ -97,7 +126,7 @@
 
 (setq default-frame-alist
       (append
-       '((width . 120) (height . 74) ;; (internal-border-width . 2)
+       '((width . 120) (height . 74) (internal-border-width . 5)
    (vertical-scroll-bars . nil)
    (left-fringe . 0) (right-fringe . 0)
    (line-space . "0"))
@@ -175,6 +204,12 @@
 
 (setq auto-mode-alist (cons '("\\.h$" . c++-mode) auto-mode-alist))
 
+(setq auto-mode-alist (cons '("\\.csproj$" . xml-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.targets$" . xml-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.props$" . xml-mode) auto-mode-alist))
+
+(setq auto-mode-alist (cons '("\\.mjs$" . javascript-mode) auto-mode-alist))
+
 ;; use mouse wheel
 ;(defun up-wheel () (interactive) (scroll-up (/ (* (window-height) 1) 2)))
 ;(defun down-wheel () (interactive) (scroll-down (/ (* (window-height) 1) 2)))
@@ -241,8 +276,9 @@
  '(mode-line-format '(" %70b" "%5l (%*)"))
  '(mouse-avoidance-mode nil nil (avoid))
  '(mouse-wheel-follow-mouse t)
+ '(ns-antialias-text t)
  '(package-selected-packages
-   '(clang-format wat-ts-mode csharp-mode go-mode haskell-mode markdown-mode yaml-mode dockerfile-mode terraform-mode web-mode rust-mode))
+   '(fsharp-mode cmake-mode clang-format wat-ts-mode csharp-mode go-mode haskell-mode markdown-mode yaml-mode dockerfile-mode terraform-mode rust-mode))
  '(perl-indent-level 2)
  '(pmd-ruleset-list '("rulesets/imports.xml" "rulesets/basic.xml"))
  '(sgml-basic-offset 2)
@@ -266,39 +302,14 @@
 ;; Disable indentation when in namespace blocks.
 (c-set-offset 'innamespace 0)
 
-(when (display-graphic-p)
-  (progn
-    (desktop-save-mode 1)
-    (custom-set-faces
-     ;; custom-set-faces was added by Custom.
-     ;; If you edit it by hand, you could mess it up, so be careful.
-     ;; Your init file should contain only one such instance.
-     ;; If there is more than one, they won't work right.
-     '(default ((t (:inherit nil :stipple nil :background "black" :foreground "rgb:dd/dd/dd" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 105 :width normal :foundry "misc" :family "fixed"))))
-     '(font-lock-comment-face ((((class color) (background dark)) (:foreground "rgb:dd/66/66"))))
-     '(font-lock-constant-face ((((class color) (background dark)) (:foreground "rgb:99/ff/dd"))))
-     '(font-lock-doc-face ((t (:foreground "rgb:dd/88/88"))))
-     '(font-lock-keyword-face ((((class color) (background dark)) (:foreground "rgb:99/ff/ff"))))
-     '(font-lock-string-face ((((class color) (background dark)) (:foreground "rgb:ff/b0/aa"))))
-     '(font-lock-type-face ((((class color) (background dark)) (:foreground "rgb:bb/ff/bb"))))
-     '(font-lock-variable-name-face ((((class color) (background dark)) (:foreground "rgb:ff/ee/dd"))))
-     '(fringe ((t (:background "rgb:0/0/0"))))
-     '(header-line ((((class color grayscale) (background dark)) (:inherit mode-line :foreground "grey90" :box nil))))
-     '(minibuffer-prompt ((((background dark)) (:foreground "rgb:99/ff/dd"))))
-     '(mode-line ((t (:background "black" :foreground "rgb:92/9f/bb" :box nil :overline "rgb:82/8f/ab"))))
-     '(mode-line-inactive ((t (:inherit mode-line :background "black"))))
-     '(region ((((class color) (background dark)) (:background "rgb:33/66/99"))))
-     '(sh-heredoc ((((min-colors 88) (class color) (background dark)) (:inherit font-lock-string-face))))
-     '(sh-heredoc-face ((((class color) (background dark)) (:foreground "rgb:dd/ff/dd"))) t)
-     '(show-paren-match ((((class color) (background dark)) (:background "rgb:00/44/77"))))
-     '(trailing-whitespace ((((class color) (background dark)) (:foreground "red" :underline t))))
-     '(vhdl-font-lock-reserved-words-face ((t (:foreground "rgb:bb/ff/bb")))))))
+(if (display-graphic-p) (desktop-save-mode 1))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "black" :foreground "rgb:dd/dd/dd" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 105 :width normal :foundry "misc" :family "fixed"))))
+ '(default ((t (:inherit nil :stipple nil :background "black" :foreground "rgb:dd/dd/dd" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :size 12 :width normal :family "Menlo"))))
  '(font-lock-comment-face ((((class color) (background dark)) (:foreground "rgb:dd/66/66"))))
  '(font-lock-constant-face ((((class color) (background dark)) (:foreground "rgb:99/ff/dd"))))
  '(font-lock-doc-face ((t (:foreground "rgb:dd/88/88"))))
